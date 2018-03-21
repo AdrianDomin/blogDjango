@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'taggit',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,3 +102,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# wysyłanie maili do powłoki
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+#konfiguracja SMTP dla gmail
+EMAIL_HOST = 'stml.gmail.com'
+EMAIL_HOST_USER = 'adriandominn@gmail.com'
+EMAIL_HOST_PASSWORD = '##'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

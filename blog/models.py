@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from taggit.managers import TaggableManager
+
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -27,6 +30,11 @@ class Post(models.Model):
                               default='draft')
     objects = models.Manager() # Menedżer domyślny.
     published = PublishedManager() # Menedżer niestandardowy.
+    #tagi
+    tags = TaggableManager()
+
+
+
 
     class Meta:
         ordering = ('-publish',)
@@ -40,3 +48,19 @@ class Post(models.Model):
                              self.publish.strftime('%m'),
                              self.publish.strftime('%d'),
                              self.slug])
+
+#komentarze
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Komentarz dodany przez {} dla posta {}'.format(self.name, self.post)
