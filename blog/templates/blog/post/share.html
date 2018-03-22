@@ -3,6 +3,9 @@
 {% block title %}Udostępnij posta{% endblock %}
 
 {% block content %}
+
+
+<div class="col-lg-8  mx-auto">
   {% if sent %}
     <h1>Wiadomość e-mail została wysłana</h1>
     <p>
@@ -11,10 +14,15 @@
   {% else %}
     <h1>Udostępnij "{{ post.title }}" przez e-mail</h1>
     <!-- metodapost podczas wysylania formularza-->
+
     <form action="." method="post">
       {{ form.as_p }}
       {% csrf_token %}
       <input type="submit" value="Wyślij wiadomość e-mail">
     </form>
   {% endif %}
+
+  </div>
+
+
 {% endblock %}

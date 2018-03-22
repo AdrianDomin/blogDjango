@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'bootstrap4',
 )
 
 MIDDLEWARE_CLASSES = (

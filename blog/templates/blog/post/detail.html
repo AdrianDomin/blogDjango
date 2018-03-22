@@ -3,7 +3,17 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
+
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+
   <h1>{{ post.title }}</h1>
+
 
     <!-- tags-->
   <p >
@@ -30,27 +40,40 @@
       {{ total_comments }} komentarz{{ total_comments|pluralize:"y" }}
     </h2>
   {% endwith %}
-    <!-- komentarze-->
-  {% for comment in comments %}
-    <div >
-      <p >
-        Komentarz {{ forloop.counter }} dodany przez {{ comment.name }}
-          {{ comment.created }}
-      </p>
-      {{ comment.body|linebreaks }}
-    </div>
-  {% empty %}
-    <p>Nie ma jeszcze żadnych komentarzy.</p>
-  {% endfor %}
 
-  {% if new_comment %}
-    <h2>Twój komentarz został dodany.</h2>
-  {% else %}
-    <h2>Dodaj nowy komentarz</h2>
-    <form action="." method="post">
-      {{ comment_form.as_p }}
-      {% csrf_token %}
-      <p><input type="submit" value="Dodaj komentarz"></p>
-    </form>
+
+
+  </div>
+
+
+
+
+<div class="col-lg-3" >
+  <!-- komentarze-->
+{% for comment in comments %}
+  <div >
+    <h5 >
+      Komentarz {{ forloop.counter }} dodany przez {{ comment.name }}
+        {{ comment.created }}
+    </h5>
+    {{ comment.body|linebreaks }}
+  </div>
+{% empty %}
+  <h5>Nie ma jeszcze żadnych komentarzy.</h5>
+{% endfor %}
+
+{% if new_comment %}
+  <h6>Twój komentarz został dodany.</h6>
+{% else %}
+  <h5>Dodaj nowy komentarz</h5>
+  <form action="." method="post">
+    {{ comment_form.as_p }}
+    {% csrf_token %}
+    <h5><input type="submit" value="Dodaj komentarz"></h5>
+  </form>
+  </div>
+  </div>
+  </div>
+</article>
   {% endif %}
 {% endblock %}
